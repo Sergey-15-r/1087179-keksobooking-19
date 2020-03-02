@@ -2,7 +2,6 @@
 
 var similarListingElement = document.querySelector('.map__pins');
 var mapElement = document.querySelector('.map');
-mapElement.classList.remove('map--faded');
 var LISTING_TITLES = ['Дамблдор', 'Волдеморт', 'Доктор Стрендж', 'Гарри Поттер', 'Дамблдор', 'Волдеморт', 'Доктор Стрендж', 'Гарри Поттер'];
 var TIMES = ['12:00', '13:00', '14:00'];
 var pinTemplate = document.querySelector('#pin')
@@ -27,9 +26,9 @@ var generatesSimilarListings = function () {
         title: LISTING_TITLES[i],
         address: '600, 350',
         price: '12 000',
-        type: ['palace', 'flat', 'house' , 'bungalo'],
-        rooms: ['1','2','3','4'],
-        guests: ['1','2','3','4','5'],
+        type: ['palace', 'flat', 'house', 'bungalo'],
+        rooms: ['1', '2', '3', '4'],
+        guests: ['1', '2', '3', '4', '5'],
         photos: ['http://o0.github.io/assets/images/tokyo/hotel1.jpg', 'http://o0.github.io/assets/images/tokyo/hotel2.jpg', 'http://o0.github.io/assets/images/tokyo/hotel3.jpg'],
         checkin: TIMES[Math.floor(Math.random() * TIMES.length)],
         checkout: TIMES[Math.floor(Math.random() * TIMES.length)],
@@ -56,11 +55,53 @@ var renderListing = function (listing) {
   return listingElement;
 };
 
-var fragment = document.createDocumentFragment();
-var mockListings = generatesSimilarListings();
+var adForm = document.querySelector('.ad-form');
+var adFormElements = adForm.querySelectorAll('fieldset');
 
-for (var i = 0; i < mockListings.length; i++) {
-  fragment.appendChild(renderListing(mockListings[i]));
+for (var i = 0; i < adFormElements.length; i++) {
+  adFormElements[i].disabled = true;
 }
-similarListingElement.appendChild(fragment);
+
+var pinMain = document.querySelector('.map__pin--main');
+
+var mainPinClickHandler = function (evt) {
+  var fragment = document.createDocumentFragment();
+  var mockListings = generatesSimilarListings();
+
+  if (evt.button === 0 || evt.key === 'Enter') {
+    for (var i = 0; i < mockListings.length; i++) {
+      fragment.appendChild(renderListing(mockListings[i]));
+    }
+    similarListingElement.appendChild(fragment);
+    mapElement.classList.remove('map--faded');
+    adForm.classList.remove('ad-form--disabled');
+    for (var i = 0; i < adFormElements.length; i++) {
+      adFormElements[i].disabled = false;
+    }
+  }
+
+};
+
+pinMain.addEventListener('mousedown', mainPinClickHandler);
+pinMain.addEventListener('keydown', mainPinClickHandler);
+
+var address = document.querySelector('#address');
+address.value = pinMain.offsetLeft + ', ' + pinMain.offsetTop;
+
+var validateRoomCapacity = function () {
+  if (capacity.value <= roomNumber.value) {
+    capacity.setCustomValidity('');
+  } else {
+    capacity.setCustomValidity('Количество комнат не соответствует Количество мест!');
+  }
+
+  adForm.reportValidity();
+};
+
+var roomNumber = document.querySelector('#room_number');
+var capacity = document.querySelector('#capacity');
+
+
+capacity.addEventListener('change', validateRoomCapacity);
+roomNumber.addEventListener('change', validateRoomCapacity);
 
