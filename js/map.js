@@ -21,7 +21,6 @@
       }
       similarListingElement.appendChild(fragment);
 
-      // enable ad form elements
       for (var i = 0; i < adFormElements.length; i++) {
         adFormElements[i].disabled = false;
       }
