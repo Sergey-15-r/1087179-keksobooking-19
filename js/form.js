@@ -12,7 +12,13 @@
     adFormElements[i].disabled = true;
   }
 
-  address.value = pinMain.offsetLeft + ', ' + pinMain.offsetTop;
+  var setFormAddress = function (left, top) {
+    address.value = left + ', ' + top;
+  };
+
+  // Установить координаты в адрес
+  setFormAddress(pinMain.offsetLeft, pinMain.offsetTop);
+
 
   var validateRoomCapacity = function () {
     if (capacity.value <= roomNumber.value) {
@@ -27,6 +33,10 @@
 
   capacity.addEventListener('change', validateRoomCapacity);
   roomNumber.addEventListener('change', validateRoomCapacity);
+
+  window.form = {
+    setFormAddress: setFormAddress
+  };
 
 })();
 
