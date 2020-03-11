@@ -96,10 +96,8 @@
           document.querySelector('main').appendChild(successTemplate.cloneNode(true));
           break;
         case Code.ERROR:
-          console.log(xhr.status);
+          document.querySelector('main').appendChild(errorTemplate.cloneNode(true));
           break;
-        default:
-          console.log('Unknown response!')
       }
     });
     evt.preventDefault();
