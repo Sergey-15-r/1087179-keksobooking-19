@@ -16,14 +16,13 @@
       adForm.classList.remove('ad-form--disabled');
       window.load(function (response) {
         window.data.listingObjects = response;
+        var fragment = document.createDocumentFragment();
+
+        for (var i = 0; i < window.data.listingObjects.length; i++) {
+          fragment.appendChild(window.pin.renderListing(window.data.listingObjects[i], i));
+        }
+        similarListingElement.appendChild(fragment);
       });
-
-      var fragment = document.createDocumentFragment();
-
-      for (var i = 0; i < window.data.listingObjects.length; i++) {
-        fragment.appendChild(window.pin.renderListing(window.data.listingObjects[i], i));
-      }
-      similarListingElement.appendChild(fragment);
 
       // enable ad form elements
       for (var i = 0; i < adFormElements.length; i++) {
