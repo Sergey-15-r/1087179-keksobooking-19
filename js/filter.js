@@ -73,8 +73,8 @@
       // условия фильтров
       var conditionType = filterType.value === 'any' ? true : el.offer.type === filterType.value;
       var conditionPrice = filterPrice.value === 'any' ? true : isInPriceRange(filterPrice.value, el.offer.price);
-      var conditionGuests = filterGuests.value === 'any' ? true : el.offer.guests == filterGuests.value;
-      var conditionRooms = filterRooms.value === 'any' ? true : el.offer.rooms == filterRooms.value;
+      var conditionGuests = filterGuests.value === 'any' ? true : el.offer.guests.toString() === filterGuests.value;
+      var conditionRooms = filterRooms.value === 'any' ? true : el.offer.rooms.toString() === filterRooms.value;
       var conditionFeatures = selectedFeatures.length > 0 ? selectedFeatures.every(function (val) {
         return el.offer.features.includes(val);
       }) : true;
