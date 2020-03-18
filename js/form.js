@@ -115,7 +115,7 @@
   formReset.addEventListener('click', resetScreen);
 
   adForm.addEventListener('submit', function (evt) {
-    window.upload(new FormData(adForm), function (xhr) {
+    window.ajax.upload(new FormData(adForm), function (xhr) {
       switch (xhr.status) {
         case Code.OK:
           document.querySelector('main').appendChild(successTemplate.cloneNode(true));

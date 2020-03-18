@@ -33,21 +33,18 @@
         } else {
           return false;
         }
-        break;
       case PriceRange.MIDDLE:
         if (price >= 10000 && price <= 50000) {
           return true;
         } else {
           return false;
         }
-        break;
       case PriceRange.HIGH:
         if (price >= 50000) {
           return true;
         } else {
           return false;
         }
-        break;
       default:
         return false;
     }
@@ -78,7 +75,9 @@
       var conditionPrice = filterPrice.value === 'any' ? true : isInPriceRange(filterPrice.value, el.offer.price);
       var conditionGuests = filterGuests.value === 'any' ? true : el.offer.guests == filterGuests.value;
       var conditionRooms = filterRooms.value === 'any' ? true : el.offer.rooms == filterRooms.value;
-      var conditionFeatures = selectedFeatures.length > 0 ? selectedFeatures.every(function (val) { return el.offer.features.includes(val); }) : true;
+      var conditionFeatures = selectedFeatures.length > 0 ? selectedFeatures.every(function (val) {
+        return el.offer.features.includes(val);
+      }) : true;
 
       return conditionType && conditionPrice && conditionGuests && conditionRooms && conditionFeatures;
     });
@@ -86,7 +85,7 @@
     render(filteredListings);
   };
 
-  filterForm.addEventListener('change', window.debounce(function () {
+  filterForm.addEventListener('change', window.util.debounce(function () {
     updateListings();
   }));
 

@@ -1,11 +1,9 @@
 'use strict';
 (function () {
 
-  var similarListingElement = document.querySelector('.map__pins');
   var mapElement = document.querySelector('.map');
   var pinMain = document.querySelector('.map__pin--main');
   var adForm = document.querySelector('.ad-form');
-  var adFormElements = adForm.querySelectorAll('fieldset');
 
 
   var successHandler = function (listings) {
@@ -40,7 +38,7 @@
       adForm.classList.remove('ad-form--disabled');
 
       // загрузить данные сервера
-      window.load(successHandler, errorHandler);
+      window.ajax.load(successHandler, errorHandler);
 
       // enable ad form elements
       window.form.setEnabledForm(false);

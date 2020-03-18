@@ -76,7 +76,7 @@
 
     evt.currentTarget.classList.add('map__pin--active');
 
-    //отрисуй карточку
+    // отрисуй карточку
 
     if (index) {
       similarListingElement.after(renderCard(window.data.listingObjects[index]));
