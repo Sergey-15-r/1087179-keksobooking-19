@@ -80,8 +80,8 @@ fieldset {
   border: 0;
 }
 
-input:invalid {
-  border: 2px dashed red;
+.ad-form__element input:invalid {
+  border: 2px solid red;
 }
 
 
