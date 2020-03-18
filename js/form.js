@@ -139,9 +139,15 @@
 
   var onPopupEscPress = function (evt) {
     var successDiv = document.querySelector('.success');
+    var mapCard = document.querySelector('.map__card');
+
     if (evt.key === 'Escape' && successDiv !== null) {
       successDiv.remove();
       resetScreen();
+    }
+
+    if (evt.key === 'Escape' && mapCard !== null) {
+      mapCard.remove();
     }
   };
 
