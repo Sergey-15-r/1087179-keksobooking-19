@@ -146,8 +146,10 @@
     }
 
     // вернуть координаты main pin
-    pinMain.style = MAIN_PIN_LOCATION;
-    setAddress(pinMain.offsetLeft, pinMain.offsetTop);
+    setTimeout(function () {
+      pinMain.style = MAIN_PIN_LOCATION;
+      setAddress(pinMain.offsetLeft, pinMain.offsetTop);
+    }, 100);
 
     // очистить карту от всех обьявлений
     document.querySelectorAll('.map__pin:not(.map__pin--main)').forEach(function (el) {
