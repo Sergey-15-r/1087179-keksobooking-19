@@ -212,21 +212,24 @@
   };
 
   adForm.addEventListener('submit', function (evt) {
-    window.ajax.upload(new FormData(adForm), function (xhr) {
-      switch (xhr.status) {
-        case Code.OK:
-          document.querySelector('main').appendChild(successTemplate.cloneNode(true));
-          document.body.addEventListener('click', onPopupClick);
-          document.addEventListener('keydown', onPopupEscPress);
-          break;
-        case Code.ERROR:
-          document.querySelector('main').appendChild(errorTemplate.cloneNode(true));
-          document.body.addEventListener('click', onPopupClick);
-          document.addEventListener('keydown', onPopupEscPress);
-          document.querySelector('.error__button').addEventListener('click', onErrorButtonClick);
-          break;
-      }
-    });
+    onValidateRoomCapacity();
+    if (adForm.checkValidity()) {
+      window.ajax.upload(new FormData(adForm), function (xhr) {
+        switch (xhr.status) {
+          case Code.OK:
+            document.querySelector('main').appendChild(successTemplate.cloneNode(true));
+            document.body.addEventListener('click', onPopupClick);
+            document.addEventListener('keydown', onPopupEscPress);
+            break;
+          case Code.ERROR:
+            document.querySelector('main').appendChild(errorTemplate.cloneNode(true));
+            document.body.addEventListener('click', onPopupClick);
+            document.addEventListener('keydown', onPopupEscPress);
+            document.querySelector('.error__button').addEventListener('click', onErrorButtonClick);
+            break;
+        }
+      });
+    }
     evt.preventDefault();
   });
 
