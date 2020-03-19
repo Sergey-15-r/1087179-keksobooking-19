@@ -41,7 +41,8 @@
   };
 
   window.data = {
-    listingObjects: generatesSimilarListings()
+    listingObjects: [],
+    generatesSimilarListings: generatesSimilarListings
   };
 
 
